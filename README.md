@@ -1,1 +1,1 @@
-# finch-collectore
+# finch-collector
