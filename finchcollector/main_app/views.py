@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from .models import Finch
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 # Add the following import
-from django.http import HttpResponse
+# from django.http import HttpResponse
 
 
 # class Finch:  # Note that parens are optional if not inheriting from another class
@@ -29,6 +30,18 @@ def about(request):
 def finches_index(request):
   finches = Finch.objects.all()
   return render(request, 'finches/index.html', { 'finches': finches })
+
+class FinchCreate(CreateView):
+  model = Finch
+  fields = '__all__'
+
+class FinchUpdate(UpdateView):
+  model = Finch
+  fields = ['breed', 'description', 'age']
+
+class FinchDelete(DeleteView):
+  model = Finch
+  success_url = '/finches/'
 
 def finches_detail(request, finch_id):
   finch = Finch.objects.get(id=finch_id)
